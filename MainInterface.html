@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project TimberTech</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style> 
+        .product-collection a {
+            text-decoration: none;
+            color: lawngreen; /* Updated color */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TimberTech Hardware Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="Feedback.html">Feedback</a></li>
+                <li><a href="OrderList.html">Order List</a></li>
+            </ul>
+            <form class="search-form" action="/search" method="GET">
+                <input type="text" name="q" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+        </nav>
+    </header>
+
+    <section class="product-collection">
+        <h2>Items on Sale</h2>
+        <a href="Checkout.html?product=item1&description=High-quality+timber+for+all+your+construction+needs.&price=50&image=timber1.jpg" class="product">
+            <img src="timber1.jpg" alt="Item 1">
+            <h3>Item 1</h3>
+            <p>High-quality timber for all your construction needs.</p>
+            <p class="price">$50</p>
+        </a>
+        <a href="Checkout.html?product=item2&description=Durable+and+long-lasting+hardware+essentials.&price=35&image=products-services.jpg" class="product">
+            <img src="products-services.jpg" alt="Item 2">
+            <h3>Item 2</h3>
+            <p>Durable and long-lasting hardware essentials.</p>
+            <p class="price">$35</p>
+        </a>
+        <a href="Checkout.html?product=item3&description=Top-notch+lumber,+perfect+for+any+project.&price=45&image=tools.jpg" class="product">
+            <img src="tools.jpg" alt="Item 3">
+            <h3>Item 3</h3>
+            <p>Top-notch lumber, perfect for any project.</p>
+            <p class="price">$45</p>
+        </a>
+    </section>
+</body>
+</html>

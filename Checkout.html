@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>TimberTech Hardware Hub</h1>
+    </header>
+
+    <section class="order-panel panel">
+        <h2>Checkout</h2>
+        <div class="product" style="width: 60%; margin: 0 auto;">
+            <img id="product-image" src="" alt="Product Image" style="max-width: 100%; height: auto;">
+            <h3 id="product-title"></h3>
+            <p id="product-description"></p>
+            <p class="price" id="product-price"></p>
+        </div>
+        <form id="confirm-order-form" class="confirm-order">
+            <input type="hidden" name="product" id="product-input">
+            <button type="submit">Confirm Order</button>
+        </form>
+    </section>
+
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                product: params.get('product'),
+                description: params.get('description'),
+                price: params.get('price'),
+                image: params.get('image')
+            };
+        }
+
+        function populateProductDetails() {
+            const { product, description, price, image } = getQueryParams();
+            if (product && description && price && image) {
+                document.getElementById('product-title').textContent = product.replace(/_/g, ' ');
+                document.getElementById('product-description').textContent = description;
+                document.getElementById('product-price').textContent = '$' + price;
+                document.getElementById('product-image').src = image;
+                document.getElementById('product-input').value = product;
+            } else {
+                document.querySelector('.order-panel').innerHTML = '<p>Product details are missing.</p>';
+            }
+        }
+
+        function saveOrderDetails(event) {
+            event.preventDefault();
+
+            const { product, description, price } = getQueryParams();
+            const orderDetails = {
+                product: product.replace(/_/g, ' '),
+                description: description,
+                price: '$' + price,
+                orderDate: new Date().toLocaleDateString(),
+                arrivalDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString() // Arrival date is one week from now
+            };
+
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(orderDetails);
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            window.location.href = 'OrderList.html';
+        }
+
+        document.getElementById('confirm-order-form').addEventListener('submit', saveOrderDetails);
+
+        window.onload = populateProductDetails;
+    </script>
+</body>
+</html>

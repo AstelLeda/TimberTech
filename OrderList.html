@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order List</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Order List</h1>
+    </header>
+    <section>
+        <h2>Confirmed Orders</h2>
+        <table id="order-table">
+            <tr>
+                <th>Item Name</th>
+                <th>Item Description</th>
+                <th>Item Price</th>
+                <th>Order Date</th>
+                <th>Arrival Date</th>
+            </tr>
+        </table>
+        <div class="back-to-menu">
+            <button onclick="window.location.href='MainInterface.html'">Back to Menu</button>
+        </div>
+    </section>
+
+    <script>
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const orderTable = document.getElementById('order-table');
+
+            orders.forEach(order => {
+                const row = document.createElement('tr');
+
+                Object.values(order).forEach(value => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+
+                orderTable.appendChild(row);
+            });
+        }
+
+        window.onload = loadOrders;
+    </script>
+</body>
+</html>
